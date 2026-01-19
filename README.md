@@ -16,7 +16,7 @@ Practical decision-making and trade-offs
 
 ---
 
-How the App Works
+#How the App Works
 
 1. The user uploads a .txt file or pastes text into the UI.
 
@@ -45,7 +45,7 @@ The document chunks used to generate the answer (for transparency)
 
 ---
 
-RAG Flow Implementation
+#RAG Flow Implementation
 
 The RAG pipeline is implemented in the backend as follows:
 
@@ -144,7 +144,7 @@ npm
 
 ---
 
-Backend Setup (FastAPI)
+#Backend Setup (FastAPI)
 
 cd backend
 python -m venv .venv
@@ -152,7 +152,7 @@ source .venv/bin/activate   # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn main:app
 
-Backend will run at:
+#Backend will run at:
 
 http://127.0.0.1:8000
 
@@ -163,7 +163,7 @@ http://127.0.0.1:8000/docs
 
 ---
 
-Frontend Setup (React)
+#Frontend Setup (React)
 
 cd frontend
 npm install
@@ -176,7 +176,7 @@ http://localhost:3000
 
 ---
 
-Assumptions and Shortcuts
+#Assumptions and Shortcuts
 
 In-memory storage is used instead of a persistent vector database to keep the system simple and easy to understand.
 
@@ -194,8 +194,10 @@ No authentication or production-level security is implemented, as this is a lear
 UI design is intentionally minimal to prioritize clarity over aesthetics.
 
 
+-----
 
-Key Learnings
+
+#Key Learnings
 
 RAG quality heavily depends on chunking strategy.
 
@@ -206,9 +208,10 @@ Deduplication is required to avoid repeated answers.
 Frontend–backend communication and CORS handling are critical in full-stack systems.
 
 
+-----
 
 
-Future Improvements (Optional)
+#Future Improvements (Optional)
 
 Replace mocked LLM with OpenAI or local LLM
 
