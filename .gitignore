@@ -1,0 +1,10 @@
+# Python
+.venv
+__pycache__/
+.mypy_cache/
+
+# Node
+node_modules/
+
+# OS / Editor
+.vscode/
