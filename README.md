@@ -1,5 +1,50 @@
 # Mini-RAG-BOOT
 
+
+This project is a Mini Retrieval-Augmented Generation (RAG) web application.
+It allows a user to upload a text document or paste text, ask questions about it, and receive answers strictly based on the uploaded content.
+
+The goal of this project is to demonstrate understanding of:
+
+RAG fundamentals
+
+Backend–frontend integration
+
+Practical decision-making and trade-offs
+
+
+
+---
+
+How the App Works
+
+1. The user uploads a .txt file or pastes text into the UI.
+
+
+2. The backend processes the text and stores it in memory.
+
+
+3. The user asks a question about the uploaded content.
+
+
+4. The backend retrieves the most relevant parts of the document.
+
+
+5. The system generates an answer using only the retrieved content.
+
+
+6. The UI displays:
+
+The answer
+
+The document chunks used to generate the answer (for transparency)
+
+
+
+
+
+---
+
 RAG Flow Implementation
 
 The RAG pipeline is implemented in the backend as follows:
@@ -12,7 +57,9 @@ Uploaded text file
 
 Pasted text from the UI
 
+
 Both are handled by the same /upload endpoint.
+
 
 2. Chunking Strategy
 
@@ -28,13 +75,17 @@ Incomplete sentences
 
 Poor semantic grouping
 
+
+
 3. Embedding Generation
 
 Each chunk is converted into a vector embedding using:
 
 sentence-transformers/all-MiniLM-L6-v2
 
+
 Embeddings are stored in an in-memory list for simplicity.
+
 
 4. Similarity Search
 
@@ -46,6 +97,8 @@ Cosine similarity is used to compare it with stored chunk embeddings.
 
 The top-K most relevant chunks are retrieved.
 
+
+
 5. Answer Generation (Mocked LLM)
 
 Instead of calling an external LLM API, a mocked LLM approach is used.
@@ -56,6 +109,7 @@ Extracting relevant sentences from retrieved chunks
 
 Deduplicating overlapping sentences
 
+
 This ensures:
 
 No hallucinations
@@ -64,13 +118,20 @@ Answers are strictly grounded in the document
 
 Focus remains on understanding RAG rather than model APIs
 
+
+
 6. Transparency
 
 Along with the answer, the backend returns the supporting document chunks.
 
 These are shown in the UI so users can see where the answer came from.
 
+
+
+---
+
 How to Run the Project Locally
+
 Prerequisites
 
 Python 3.10+
@@ -78,3 +139,84 @@ Python 3.10+
 Node.js (if using React frontend)
 
 npm
+
+
+
+---
+
+Backend Setup (FastAPI)
+
+cd backend
+python -m venv .venv
+source .venv/bin/activate   # On Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn main:app
+
+Backend will run at:
+
+http://127.0.0.1:8000
+
+Swagger UI:
+
+http://127.0.0.1:8000/docs
+
+
+---
+
+Frontend Setup (React)
+
+cd frontend
+npm install
+npm start
+
+Frontend will run at:
+
+http://localhost:3000
+
+
+---
+
+Assumptions and Shortcuts
+
+In-memory storage is used instead of a persistent vector database to keep the system simple and easy to understand.
+
+A mocked LLM is used instead of OpenAI or a local large model to:
+
+Avoid API keys and costs
+
+Focus on RAG fundamentals
+
+Ensure answers remain grounded in the uploaded content
+
+
+No authentication or production-level security is implemented, as this is a learning-focused prototype.
+
+UI design is intentionally minimal to prioritize clarity over aesthetics.
+
+
+
+Key Learnings
+
+RAG quality heavily depends on chunking strategy.
+
+Retrieval happens at the chunk level, not sentence level.
+
+Deduplication is required to avoid repeated answers.
+
+Frontend–backend communication and CORS handling are critical in full-stack systems.
+
+
+
+
+Future Improvements (Optional)
+
+Replace mocked LLM with OpenAI or local LLM
+
+Use a persistent vector database (e.g., Qdrant)
+
+Add streaming responses
+
+Add document reset / multi-document support
+
+
+
