@@ -130,7 +130,7 @@ These are shown in the UI so users can see where the answer came from.
 
 ---
 
-How to Run the Project Locally
+# How to Run the Project Locally
 
 Prerequisites
 
